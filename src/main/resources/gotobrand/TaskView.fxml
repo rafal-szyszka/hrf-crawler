@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cccenter.robot.gotobrand.controller.TaskViewController">
+   <children>
+      <VBox alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="280.0" prefWidth="390.0">
+         <children>
+            <Label text="Podgląd" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></Label>
+            <AnchorPane prefHeight="40.0" prefWidth="277.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="12.0" prefWidth="118.0" text="Nazwa zadania:" />
+                  <TextField fx:id="taskNameOV" layoutX="132.0" layoutY="7.0" prefHeight="25.0" prefWidth="245.0" />
+               </children>
+            </AnchorPane>
+             <AnchorPane prefHeight="125.0" prefWidth="390.0">
+                 <children>
+                     <Label layoutX="125.0" layoutY="14.0" text="Opis planowanych działań:" />
+                  <TextArea fx:id="taskDescOV" layoutX="9.0" layoutY="38.0" prefHeight="80.0" prefWidth="373.0" />
+                 </children>
+             </AnchorPane>
+             <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                 <children>
+                     <Label layoutX="14.0" layoutY="12.0" prefWidth="118.0" text="Termin realizacji od:" />
+                  <TextField fx:id="taskStartDateOV" layoutX="132.0" layoutY="8.0" />
+                 </children>
+             </AnchorPane>
+             <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                 <children>
+                     <Label layoutX="14.0" layoutY="12.0" prefWidth="118.0" text="Termin realizacji do:" />
+                  <TextField fx:id="taskEndDateOV" layoutX="132.0" layoutY="8.0" />
+                 </children>
+             </AnchorPane>
+         </children></VBox>
+      <VBox alignment="CENTER" layoutX="437.0" layoutY="12.0" prefHeight="280.0" prefWidth="390.0">
+          <children>
+              <Label text="Edycja" textAlignment="CENTER">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+                  <padding>
+                      <Insets bottom="10.0" />
+                  </padding></Label>
+              <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                  <children>
+                      <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Nazwa zadania:" />
+                  <ComboBox fx:id="taskName" layoutX="132.0" layoutY="7.0" prefHeight="25.0" prefWidth="245.0" />
+                  </children>
+              </AnchorPane>
+              <AnchorPane prefHeight="125.0" prefWidth="390.0">
+                  <children>
+                      <Label layoutX="125.0" layoutY="14.0" text="Opis planowanych działań:" />
+                  <TextArea fx:id="taskDesc" layoutX="9.0" layoutY="37.0" prefHeight="80.0" prefWidth="373.0" />
+                  </children>
+              </AnchorPane>
+              <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                  <children>
+                      <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Termin realizacji od:" />
+                  <TextField fx:id="taskStartDate" layoutX="132.0" layoutY="8.0" />
+                  </children>
+              </AnchorPane>
+              <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                  <children>
+                      <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Termin realizacji do:" />
+                  <TextField fx:id="taskEndDate" layoutX="132.0" layoutY="8.0" />
+                  </children>
+              </AnchorPane>
+          </children></VBox>
+      <Separator layoutX="407.0" layoutY="-9.0" orientation="VERTICAL" prefHeight="419.0" prefWidth="28.0" />
+      <Button fx:id="prevTask" layoutX="427.0" layoutY="294.0" mnemonicParsing="false" onAction="#prevTaskAction" text="Poprzedni" />
+      <Button fx:id="changeTaskData" layoutX="571.0" layoutY="294.0" mnemonicParsing="false" onAction="#changeTaskData" text="Zmień" />
+      <Button fx:id="skipTask" layoutX="510.0" layoutY="294.0" mnemonicParsing="false" onAction="#skipTaskAction" text="Pomiń" />
+      <Button fx:id="confirmAll" layoutX="709.0" layoutY="294.0" mnemonicParsing="false" onAction="#confirmAllAction" text="Zatwierdź wszystko" />
+      <Button fx:id="nextTask" layoutX="632.0" layoutY="294.0" mnemonicParsing="false" onAction="#nextTaskAction" text="Następny" />
+      <Button fx:id="fillHRF" layoutX="330.0" layoutY="294.0" mnemonicParsing="false" onAction="#preparePage" text="Rozpocznij" />
+      <Button layoutX="14.0" layoutY="294.0" mnemonicParsing="false" onAction="#clearPrevious" text="Wyczyść poprzednie zadania" />
+   </children>
+</AnchorPane>

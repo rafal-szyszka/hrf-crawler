@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cccenter.robot.gotobrand.controller.CostViewController">
+    <children>
+        <VBox alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="445.0" prefWidth="390.0">
+            <children>
+                <Label text="Podgląd" textAlignment="CENTER">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" />
+                    </padding></Label>
+                <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Nazwa zadania:" />
+                  <TextField fx:id="taskNameOV" layoutX="132.0" layoutY="8.0" prefHeight="25.0" prefWidth="245.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="390.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Kategoria kosztu:" />
+                  <TextField fx:id="costCatOV" layoutX="132.0" layoutY="8.0" prefHeight="25.0" prefWidth="245.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="200.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefWidth="118.0" text="Nazwa kosztu:" />
+                        <TextField fx:id="costNameOV" layoutX="132.0" layoutY="8.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="100.0" prefWidth="390.0">
+                    <children>
+                        <Label layoutX="125.0" layoutY="14.0" text="Opis planowanych działań:" />
+                        <TextArea fx:id="costDescOV" layoutX="9.0" layoutY="37.0" prefHeight="60.0" prefWidth="373.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="149.0" text="Wydatki ogółem:" />
+                        <TextField fx:id="costInAllOV" layoutX="227.0" layoutY="8.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="149.0" text="Wydatki kwalifikowane:" />
+                        <TextField fx:id="qualifiedCostOV" layoutX="227.0" layoutY="8.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="200.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="149.0" text="vat:" />
+                        <TextField fx:id="vatOV" layoutX="227.0" layoutY="8.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="200.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="149.0" text="Dofinansowanie:" />
+                        <TextField fx:id="subsidyOV" layoutX="227.0" layoutY="7.0" />
+                    </children>
+                </AnchorPane>
+            </children></VBox>
+        <VBox alignment="CENTER" layoutX="437.0" layoutY="12.0" prefHeight="445.0" prefWidth="390.0">
+            <children>
+                <Label text="Edycja" textAlignment="CENTER">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" />
+                    </padding></Label>
+                <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Nazwa zadania:" />
+                        <ComboBox fx:id="taskName" layoutX="132.0" layoutY="7.0" prefHeight="25.0" prefWidth="245.0" />
+                    </children>
+                </AnchorPane>
+            <AnchorPane prefHeight="40.0" prefWidth="390.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="118.0" text="Kategoria kosztu:" />
+                  <ComboBox fx:id="costCat" layoutX="132.0" layoutY="8.0" prefHeight="25.0" prefWidth="245.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="12.0" prefWidth="118.0" text="Nazwa kosztu:" />
+                  <TextField fx:id="costName" layoutX="132.0" layoutY="8.0" />
+               </children>
+            </AnchorPane>
+                <AnchorPane prefHeight="100.0" prefWidth="390.0">
+                    <children>
+                        <Label layoutX="125.0" layoutY="14.0" text="Opis planowanych działań:" />
+                        <TextArea fx:id="costDesc" layoutX="9.0" layoutY="37.0" prefHeight="60.0" prefWidth="373.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="149.0" text="Wydatki ogółem:" />
+                        <TextField fx:id="costInAll" layoutX="227.0" layoutY="8.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="40.0" prefWidth="277.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="149.0" text="Wydatki kwalifikowane:" />
+                        <TextField fx:id="qualifiedCost" layoutX="227.0" layoutY="8.0" />
+                    </children>
+                </AnchorPane>
+            <AnchorPane prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="149.0" text="vat:" />
+                  <TextField fx:id="vat" layoutX="227.0" layoutY="8.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="149.0" text="Dofinansowanie:" />
+                  <TextField fx:id="subsidy" layoutX="227.0" layoutY="7.0" />
+               </children>
+            </AnchorPane>
+            </children></VBox>
+        <Separator layoutX="407.0" layoutY="-9.0" orientation="VERTICAL" prefHeight="549.0" prefWidth="28.0" />
+        <Button fx:id="prevCost" layoutX="432.0" layoutY="457.0" mnemonicParsing="false" onAction="#prevCostAction" text="Poprzedni" />
+        <Button fx:id="changeCostData" layoutX="576.0" layoutY="457.0" mnemonicParsing="false" onAction="#changeCostDataAction" text="Zmień" />
+        <Button fx:id="skipCost" layoutX="515.0" layoutY="457.0" mnemonicParsing="false" onAction="#skipCostAction" text="Pomiń" />
+        <Button fx:id="confirmAll" layoutX="714.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmAllAction" text="Zatwierdź wszystko" />
+        <Button fx:id="nextCost" layoutX="637.0" layoutY="457.0" mnemonicParsing="false" onAction="#nextCostAction" text="Następny" />
+        <Button fx:id="fillHRF" layoutX="172.0" layoutY="494.0" mnemonicParsing="false" onAction="#preparePage" text="Rozpocznij" />
+      <ProgressBar fx:id="progress" layoutX="432.0" layoutY="490.0" prefHeight="18.0" prefWidth="400.0" progress="0.0" />
+      <Label fx:id="message" layoutX="432.0" layoutY="511.0" prefHeight="17.0" prefWidth="400.0" text="Aktualne zadanie" />
+    </children>
+</AnchorPane>
