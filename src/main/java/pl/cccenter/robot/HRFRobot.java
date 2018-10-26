@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class HRFRobot extends Application {
 
-    public static final String VERSION = "2.1.1";
+    public static final String VERSION = "2.2.1";
 
     public static final String ROBOT_SHEET = "ROBOT";
     public enum RunMode {

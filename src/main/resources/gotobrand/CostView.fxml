@@ -137,6 +137,7 @@
         <Button fx:id="confirmAll" layoutX="714.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmAllAction" text="Zatwierdź wszystko" />
         <Button fx:id="nextCost" layoutX="637.0" layoutY="457.0" mnemonicParsing="false" onAction="#nextCostAction" text="Następny" />
         <Button fx:id="fillHRF" layoutX="172.0" layoutY="494.0" mnemonicParsing="false" onAction="#preparePage" text="Rozpocznij" />
+        <Button fx:id="closeApp" layoutX="172.0" layoutY="494.0" mnemonicParsing="false" onAction="#closeApp" text="Zakończ" />
       <ProgressBar fx:id="progress" layoutX="432.0" layoutY="490.0" prefHeight="18.0" prefWidth="400.0" progress="0.0" />
       <Label fx:id="message" layoutX="432.0" layoutY="511.0" prefHeight="17.0" prefWidth="400.0" text="Aktualne zadanie" />
     </children>

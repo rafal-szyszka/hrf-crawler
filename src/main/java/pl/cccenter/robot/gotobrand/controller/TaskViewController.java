@@ -207,28 +207,28 @@ public class TaskViewController implements Initializable {
         motion.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, e -> {
             ((Stage) taskName.getScene().getWindow()).close();
             try {
-                if (costs != null && costs.size() > 0) {
+                //if (costs != null && costs.size() > 0) {
                     (new CostView()).show(costs, lumpCosts, browser);
-                } else {
-                    (new LumpCostView()).show(lumpCosts, browser);
-                }
+                //} else {
+                    //(new LumpCostView()).show(lumpCosts, browser);
+                //}
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
 
         (new Thread(motion)).start();
-//        for (int i = 0; i < arrayTasks.size(); i++) {
-//            String[] task = arrayTasks.get(i);
-//            String script = GTBTasks.FILL_TASK_SCRIPT.replaceAll("arg1", Integer.toString(i));
-//            script = script.replaceAll("arg2", task[0].equals("null") ? "" : task[0]);
-//            script = script.replace("arg3", task[1].equals("null") ? "" : task[1]);
-//            script = script.replace("arg4", task[2].equals("null") ? "" : task[2]);
-//            script = script.replace("arg5", task[3].equals("null") ? "" : task[3]);
-//            script = script.replaceAll("\n", " ");
-//            System.out.println(script + "\n\n");
-//            browser.executeVoidScript(script);
-//        }
+        /*for (int i = 0; i < arrayTasks.size(); i++) {
+            String[] task = arrayTasks.get(i);
+            String script = GTBTasks.FILL_TASK_SCRIPT.replaceAll("arg1", Integer.toString(i));
+            script = script.replaceAll("arg2", task[0].equals("null") ? "" : task[0]);
+            script = script.replace("arg3", task[1].equals("null") ? "" : task[1]);
+            script = script.replace("arg4", task[2].equals("null") ? "" : task[2]);
+            script = script.replace("arg5", task[3].equals("null") ? "" : task[3]);
+            script = script.replaceAll("\n", " ");
+            System.out.println(script + "\n\n");
+            browser.executeVoidScript(script);
+        }*/
     }
 
     private void fixNewLines() {
@@ -266,7 +266,6 @@ public class TaskViewController implements Initializable {
     }
 
     private void initializePage() {
-
         GTBPage pageInitializer = new GTBPage.Builder()
                 .setTaskCount(tasks.size())
                 .setCostCount(costs.size())
@@ -299,7 +298,7 @@ public class TaskViewController implements Initializable {
     private void setAllowedTaskNames() {
         ArrayList<String> allowed = (ArrayList<String>) browser.executeReturnScript(GTBPage.GET_ALLOWED_TASK_NAMES);
         ObservableList<String> allowedTaskNames = FXCollections.observableArrayList();
-        allowed.forEach(allowedTaskNames::add);
+        allowedTaskNames.addAll(allowed);
         taskName.setItems(allowedTaskNames);
     }
 

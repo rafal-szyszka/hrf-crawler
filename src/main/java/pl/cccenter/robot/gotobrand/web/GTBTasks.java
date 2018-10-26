@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class GTBTasks extends javafx.concurrent.Task<Void> {
 
-    public static final String FILL_TASK_SCRIPT = "var changed = false;\n" +
+    /*public static final String FILL_TASK_SCRIPT = "var changed = false;\n" +
             "var taskName = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_zadanieDozwolonaNazwa');\n" +
             "for(var i = 0; i < taskName.options.length; i ++) {\n" +
             "if(taskName.options[i].innerHTML == 'arg2'){\n" +
@@ -19,6 +19,21 @@ public class GTBTasks extends javafx.concurrent.Task<Void> {
             "\n" +
             "var taskDesc = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_opisPlanowanychDzialan');\n" +
             "taskDesc.value = 'arg3';\n" +
+            "var sDate = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_dataRozpoczeciaZadania');\n" +
+            "sDate.value = 'arg4';\n" +
+            "sDate.dispatchEvent(new Event('change'));\n" +
+            "var eDate = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_dataZakonczeniaZadania');\n" +
+            "eDate.value = 'arg5';\n" +
+            "eDate.dispatchEvent(new Event('change'));";*/
+
+    public static final String FILL_TASK_SCRIPT = "var changed = false;\n" +
+            "var taskName = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_nazwa');\n" +
+            "taskName.value = 'arg2';\n" +
+            "taskName.dispatchEvent(new Event('change'));\n" +
+            "\n" +
+            "var taskDesc = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_opisPlanowanychDzialan');\n" +
+            "taskDesc.value = 'arg3';\n" +
+            "taskDesc.dispatchEvent(new Event('change'));\n" +
             "var sDate = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_dataRozpoczeciaZadania');\n" +
             "sDate.value = 'arg4';\n" +
             "sDate.dispatchEvent(new Event('change'));\n" +

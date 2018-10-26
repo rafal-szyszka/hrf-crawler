@@ -69,6 +69,10 @@ public class CostViewController implements Initializable {
     private Button confirmAll;
     @FXML
     private Button nextCost;
+    @FXML
+    private Button closeApp;
+    @FXML
+    private Button fillHRF;
 
     @FXML
     private ProgressBar progress;
@@ -176,7 +180,12 @@ public class CostViewController implements Initializable {
         gtbCosts.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
             message.textProperty().unbind();
             progress.progressProperty().unbind();
-            message.setText("");
+            message.setText("Pomyślnie wypełniłeś wniosek!");
+            fillHRF.setDisable(true);
+            fillHRF.setVisible(false);
+            closeApp.setDisable(false);
+            closeApp.setVisible(true);
+            /* below lines are for lump costs only
             ((Stage)prevCost.getScene().getWindow()).close();
             try {
                 if(lumpCosts != null && lumpCosts.size() > 0) {
@@ -184,7 +193,7 @@ public class CostViewController implements Initializable {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         });
 
         message.textProperty().bind(gtbCosts.messageProperty());
@@ -205,6 +214,10 @@ public class CostViewController implements Initializable {
             System.out.println(script + "\n\n");
             browser.executeVoidScript(script);
         }*/
+    }
+
+    public void closeApp() {
+        ((Stage)message.getScene().getWindow()).close();
     }
 
     /**
@@ -292,5 +305,7 @@ public class CostViewController implements Initializable {
         disableButtons(true);
         progress.setProgress(0);
         message.setText("");
+        closeApp.setDisable(true);
+        closeApp.setVisible(false);
     }
 }
