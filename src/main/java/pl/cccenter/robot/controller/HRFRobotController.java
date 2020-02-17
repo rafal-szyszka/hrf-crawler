@@ -1,5 +1,7 @@
 package pl.cccenter.robot.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,10 +10,9 @@ import javafx.stage.FileChooser;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pl.cccenter.robot.HRFRobot;
 import pl.cccenter.robot.excel.XLSFileChooser;
+import pl.cccenter.robot.gotobrand.PromoTaskView;
 import pl.cccenter.robot.gotobrand.TaskView;
-import pl.cccenter.robot.hrf.Cost;
-import pl.cccenter.robot.hrf.LumpCost;
-import pl.cccenter.robot.hrf.Task;
+import pl.cccenter.robot.hrf.*;
 import pl.cccenter.robot.tasks.*;
 import pl.cccenter.robot.web.FirefoxBrowser;
 import pl.cccenter.robot.web.LoginData;
@@ -43,8 +44,10 @@ public class HRFRobotController implements Initializable {
     private ArrayList<Task> tasks;
     private ArrayList<Cost> costs;
     private ArrayList<LumpCost> lumpCosts;
+    private ArrayList<PromoTask> promoTasks;
     private FirefoxBrowser browser;
     private HRFRobot.RunMode runMode;
+    private ArrayList<DetailCost> detailCosts;
 
     public HRFRobotController() {
     }
@@ -61,13 +64,15 @@ public class HRFRobotController implements Initializable {
     public void fillHRFAction() {
         goBackToInitialState();
         try {
-            new TaskView.Builder()
+            new PromoTaskView.Builder()
                     .setBrowser(browser)
                     .setCosts(costs)
                     .setTasks(tasks)
                     .setLoginData(loginData)
                     .setLumpCosts(lumpCosts)
-                    .createTaskView()
+                    .setPromoTasks(promoTasks)
+                    .setDetailCosts(detailCosts)
+                    .createPromoProgramView()
                     .show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,6 +85,7 @@ public class HRFRobotController implements Initializable {
         openBrowser.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
             messageArea.textProperty().unbind();
             browser = openBrowser.getValue();
+            messageArea.appendText("");
             logIntoGenerator();
         });
 
@@ -95,6 +101,7 @@ public class HRFRobotController implements Initializable {
         loginService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
             messageArea.textProperty().unbind();
             browser = loginService.getValue();
+            messageArea.appendText("");
         });
 
         messageArea.textProperty().bind(loginService.messageProperty());
@@ -107,6 +114,7 @@ public class HRFRobotController implements Initializable {
         getLoginData.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
             messageArea.textProperty().unbind();
             loginData = getLoginData.getValue();
+            messageArea.appendText("");
             getTasksData();
         });
 
@@ -125,6 +133,7 @@ public class HRFRobotController implements Initializable {
             messageArea.textProperty().unbind();
             taskProgress.progressProperty().unbind();
             tasks = readTasks.getValue();
+            messageArea.appendText("");
             getCostsData();
         });
 
@@ -143,6 +152,7 @@ public class HRFRobotController implements Initializable {
             messageArea.textProperty().unbind();
             taskProgress.progressProperty().unbind();
             costs = readCost.getValue();
+            messageArea.appendText("");
             getLumpCostsData();
         });
 
@@ -161,13 +171,52 @@ public class HRFRobotController implements Initializable {
             messageArea.textProperty().unbind();
             taskProgress.progressProperty().unbind();
             lumpCosts = readLumpCost.getValue();
-            confirm.setVisible(false);
-            openHrf.setVisible(true);
+            messageArea.appendText("");
+            getPromoTasks();
         });
 
         messageArea.textProperty().bind(readLumpCost.messageProperty());
         taskProgress.progressProperty().bind(readLumpCost.progressProperty());
         new Thread(readLumpCost).start();
+    }
+
+    private void getPromoTasks() {
+        ReadPromoTasks readPromoTasks = new ReadPromoTasks();
+        readPromoTasks.setPrevMessage(messageArea.getText());
+        readPromoTasks.setRobotSheet(workbook.getSheet(HRFRobot.ROBOT_SHEET));
+        readPromoTasks.setPromoTasks(new ArrayList<>());
+
+        readPromoTasks.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
+            messageArea.textProperty().unbind();
+            taskProgress.progressProperty().unbind();
+            promoTasks = readPromoTasks.getValue();
+            messageArea.appendText("");
+            getDetailCosts();
+        });
+
+        messageArea.textProperty().bind(readPromoTasks.messageProperty());
+        taskProgress.progressProperty().bind(readPromoTasks.progressProperty());
+        new Thread(readPromoTasks).start();
+    }
+
+    private void getDetailCosts() {
+        ReadDetailCost readDetailCost = new ReadDetailCost();
+        readDetailCost.setPrevMessage(messageArea.getText());
+        readDetailCost.setRobotSheet(workbook.getSheet(HRFRobot.ROBOT_SHEET));
+        readDetailCost.setDetailCosts(new ArrayList<>());
+
+        readDetailCost.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, e -> {
+            messageArea.textProperty().unbind();
+            taskProgress.progressProperty().unbind();
+            detailCosts = readDetailCost.getValue();
+            confirm.setVisible(false);
+            openHrf.setVisible(true);
+            messageArea.appendText("");
+        });
+
+        messageArea.textProperty().bind(readDetailCost.messageProperty());
+        taskProgress.progressProperty().bind(readDetailCost.progressProperty());
+        new Thread(readDetailCost).start();
     }
 
     public void chooseFileAction() {
@@ -208,7 +257,8 @@ public class HRFRobotController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         runMode = HRFRobot.RunMode.RAW;
         chosenFile.setText("Wybierz plik aby móc kontynuować");
-        messageArea.setText("Aplikacja HRFRobot służy do automatycznego wypełniania wniosków.");
+        messageArea.textProperty().addListener((observable, oldValue, newValue) -> messageArea.setScrollTop(Double.MAX_VALUE));
+        messageArea.appendText("Aplikacja HRFRobot służy do automatycznego wypełniania wniosków.");
         taskProgress.setProgress(0);
         taskName.setText("Postęp aktualnego zadania:");
         confirm.setDisable(true);

@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.cccenter.robot.gotobrand.controller.DetailCostController;
 import pl.cccenter.robot.gotobrand.controller.LumpCostController;
 import pl.cccenter.robot.hrf.DetailCost;
 import pl.cccenter.robot.hrf.LumpCost;
@@ -13,21 +14,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Rafał Szyszka on 27.04.2018.
+ * Created by Rafał Szyszka on 08.03.2019.
  */
-public class LumpCostView {
+public class DetailCostView {
 
-    public void show(ArrayList<LumpCost> lumpCosts, ArrayList<DetailCost> detailCosts, FirefoxBrowser browser) throws IOException {
+    public void show(ArrayList<DetailCost> detailCosts, FirefoxBrowser browser) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gotobrand/LumpCostView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gotobrand/DetailCostView.fxml"));
         Parent root = loader.load();
 
-        LumpCostController lumpCostController = loader.getController();
-        lumpCostController.setBrowser(browser);
-        lumpCostController.setLumpCosts(lumpCosts);
-        lumpCostController.setDetailCosts(detailCosts);
+        DetailCostController detailCostController = loader.getController();
+        detailCostController.setBrowser(browser);
+        detailCostController.setDetailCosts(detailCosts);
 
-        stage.setTitle("Koszty ryczałtowe");
+        stage.setTitle("Szczegółowe wydatki");
         stage.setScene(new Scene(root));
         stage.setAlwaysOnTop(true);
         stage.show();

@@ -134,7 +134,7 @@
         <Button fx:id="prevCost" layoutX="432.0" layoutY="457.0" mnemonicParsing="false" onAction="#prevCostAction" text="Poprzedni" />
         <Button fx:id="changeCostData" layoutX="576.0" layoutY="457.0" mnemonicParsing="false" onAction="#changeCostDataAction" text="Zmień" />
         <Button fx:id="skipCost" layoutX="515.0" layoutY="457.0" mnemonicParsing="false" onAction="#skipCostAction" text="Pomiń" />
-        <Button fx:id="confirmAll" layoutX="714.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmAllAction" text="Zatwierdź wszystko" />
+        <Button fx:id="confirmAll" layoutX="714.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmAllAction" style="-fx-background-color: rgb(50,225,55);" text="Zatwierdź wszystko" />
         <Button fx:id="nextCost" layoutX="637.0" layoutY="457.0" mnemonicParsing="false" onAction="#nextCostAction" text="Następny" />
         <Button fx:id="fillHRF" layoutX="172.0" layoutY="494.0" mnemonicParsing="false" onAction="#preparePage" text="Rozpocznij" />
         <Button fx:id="closeApp" layoutX="172.0" layoutY="494.0" mnemonicParsing="false" onAction="#closeApp" text="Zakończ" />

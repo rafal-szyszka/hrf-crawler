@@ -15,6 +15,8 @@ public class GTBPage extends Task<Void> {
         public static final String TASKS_AMOUNT = "tasksAmount";
         public static final String COSTS_AMOUNT = "costsAmount";
         public static final String LUMP_COSTS_AMOUNT = "lumpCostsAmount";
+        public static final String PROMO_TASK_AMOUNT = "lumpCostsAmount";
+        public static final String DETAIL_COST_AMOUNT = "detailCostAmount";
     }
 
     public static final String GET_ALLOWED_COST_CATS = "var select = document.getElementById(\"zakres_rzeczowo_finansowy_wydatki_0_zadanie\");\n" +
@@ -66,12 +68,22 @@ public class GTBPage extends Task<Void> {
             "      btns[i].dispatchEvent(new Event('click'));\n" +
             "    }\n" +
             "  }\n" +
+            "  //if(btns[i].innerHTML === \"Dodaj działanie promocyjne\") {\n" +
+            "    //for(var j = 0; j < " + Arguments.PROMO_TASK_AMOUNT + "; j++) {\n" +
+            "      //btns[i].dispatchEvent(new Event('click'));\n" +
+            "    //}\n" +
+            "  //}\n" +
+            "  if(btns[i].innerHTML.indexOf(\"Dodaj wydatek szczegółowy\") != -1) {\n" +
+            "    for(var j = 0; j < " + Arguments.DETAIL_COST_AMOUNT + "; j++) {\n" +
+            "      btns[i].dispatchEvent(new Event('click'));\n" +
+            "    }\n" +
+            "  }\n" +
             "}";
 
     public static final String REMOVE_CURRENT_TASKS_COSTS = "var delbut = document.querySelectorAll(\".btn\");\n" +
             "\n" +
             "for(var i = delbut.length - 1; i >= 0; i--) {\n" +
-            "  if(delbut[i].innerHTML.indexOf(\"Usuń wydatek\") != -1 || delbut[i].innerHTML.indexOf(\"Usuń wydatek rozliczany ryczałtowo\") != -1){\n" +
+            "  if(delbut[i].innerHTML.indexOf(\"Usuń wydatek\") != -1 || delbut[i].innerHTML.indexOf(\"Usuń wydatek rozliczany ryczałtowo\") != -1 || delbut[i].innerHTML.indexOf(\"Usuń wydatek szczegółowy\") != -1){\n" +
             "    delbut[i].dispatchEvent(new Event('click'));\n" +
             "  }\n" +
             "}";
@@ -79,13 +91,17 @@ public class GTBPage extends Task<Void> {
     private int taskCount;
     private int costCount;
     private int lumpCostsAmount;
+    private int promoTasksAmount;
+    private int detailCostAmount;
 
     private FirefoxBrowser browser;
 
-    private GTBPage(int taskCount, int costCount, int lumpCostsAmount, FirefoxBrowser browser) {
+    private GTBPage(int taskCount, int costCount, int lumpCostsAmount, int promoTasksAmount, int detailCostAmount, FirefoxBrowser browser) {
         this.taskCount = taskCount;
         this.costCount = costCount;
         this.lumpCostsAmount = lumpCostsAmount;
+        this.promoTasksAmount = promoTasksAmount;
+        this.detailCostAmount = detailCostAmount;
         this.browser = browser;
     }
 
@@ -95,7 +111,9 @@ public class GTBPage extends Task<Void> {
         String revealTasksScript = CLICK_ADD_BUTTON_SCRIPT
                 .replace(Arguments.TASKS_AMOUNT, Integer.toString(taskCount))
                 .replace(Arguments.COSTS_AMOUNT, Integer.toString(costCount))
-                .replace(Arguments.LUMP_COSTS_AMOUNT, Integer.toString(lumpCostsAmount));
+                .replace(Arguments.LUMP_COSTS_AMOUNT, Integer.toString(lumpCostsAmount))
+                .replace(Arguments.PROMO_TASK_AMOUNT, Integer.toString(promoTasksAmount))
+                .replace(Arguments.DETAIL_COST_AMOUNT, Integer.toString(detailCostAmount));
 
         browser.executeVoidScript(revealTasksScript);
         return null;
@@ -109,6 +127,8 @@ public class GTBPage extends Task<Void> {
         private int taskCount;
         private int costCount;
         private int lumpCostsAmount;
+        private int promoTasksAmount;
+        private int detailCostAmount;
         private FirefoxBrowser browser;
 
         public Builder setTaskCount(int taskCount) {
@@ -131,8 +151,18 @@ public class GTBPage extends Task<Void> {
             return this;
         }
 
+        public Builder setPromoTasksAmount(int promoTasksAmount) {
+            this.promoTasksAmount = promoTasksAmount;
+            return this;
+        }
+
+        public Builder setDetailCostAmount(int detailCostAmount) {
+            this.detailCostAmount = detailCostAmount;
+            return this;
+        }
+
         public GTBPage createGTBPage() {
-            return new GTBPage(taskCount, costCount, lumpCostsAmount, browser);
+            return new GTBPage(taskCount, costCount, lumpCostsAmount, promoTasksAmount, detailCostAmount, browser);
         }
     }
 }

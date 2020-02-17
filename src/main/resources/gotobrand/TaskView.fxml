@@ -85,9 +85,9 @@
       <Button fx:id="prevTask" layoutX="427.0" layoutY="294.0" mnemonicParsing="false" onAction="#prevTaskAction" text="Poprzedni" />
       <Button fx:id="changeTaskData" layoutX="571.0" layoutY="294.0" mnemonicParsing="false" onAction="#changeTaskData" text="Zmień" />
       <Button fx:id="skipTask" layoutX="510.0" layoutY="294.0" mnemonicParsing="false" onAction="#skipTaskAction" text="Pomiń" />
-      <Button fx:id="confirmAll" layoutX="709.0" layoutY="294.0" mnemonicParsing="false" onAction="#confirmAllAction" text="Zatwierdź wszystko" />
+      <Button fx:id="confirmAll" layoutX="709.0" layoutY="294.0" mnemonicParsing="false" onAction="#confirmAllAction" style="-fx-background-color: rgb(50,225,55);" text="Zatwierdź wszystko" />
       <Button fx:id="nextTask" layoutX="632.0" layoutY="294.0" mnemonicParsing="false" onAction="#nextTaskAction" text="Następny" />
       <Button fx:id="fillHRF" layoutX="330.0" layoutY="294.0" mnemonicParsing="false" onAction="#preparePage" text="Rozpocznij" />
-      <Button layoutX="14.0" layoutY="294.0" mnemonicParsing="false" onAction="#clearPrevious" text="Wyczyść poprzednie zadania" />
+      <Button layoutX="14.0" layoutY="294.0" mnemonicParsing="false" onAction="#clearPrevious" style="-fx-background-color: rgb(255,55,50);" text="Wyczyść poprzednie zadania" />
    </children>
 </AnchorPane>

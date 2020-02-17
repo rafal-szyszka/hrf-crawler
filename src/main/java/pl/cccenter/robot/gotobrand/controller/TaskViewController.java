@@ -16,6 +16,7 @@ import pl.cccenter.robot.gotobrand.LumpCostView;
 import pl.cccenter.robot.gotobrand.web.GTBTasks;
 import pl.cccenter.robot.gotobrand.web.GTBPage;
 import pl.cccenter.robot.hrf.Cost;
+import pl.cccenter.robot.hrf.DetailCost;
 import pl.cccenter.robot.hrf.LumpCost;
 import pl.cccenter.robot.hrf.Task;
 import pl.cccenter.robot.web.FirefoxBrowser;
@@ -73,6 +74,7 @@ public class TaskViewController implements Initializable {
     private ArrayList<Cost> costs;
     private ArrayList<LumpCost> lumpCosts;
     private LoginData loginData;
+    private ArrayList<DetailCost> detailCosts;
 
     public TaskViewController() {
 
@@ -198,20 +200,23 @@ public class TaskViewController implements Initializable {
     }
 
     public void confirmAllAction() {
-        fixNewLines();
+        //fixNewLines();
 
         ArrayList<String[]> arrayTasks = new ArrayList<>();
-        tasks.forEach(task -> arrayTasks.add(task.splitToAtr()));
+        tasks.forEach(task -> {
+            System.out.println(task.toString());
+            arrayTasks.add(task.splitToAtr());
+        });
         GTBTasks motion = new GTBTasks(arrayTasks, browser);
 
         motion.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, e -> {
             ((Stage) taskName.getScene().getWindow()).close();
             try {
-                //if (costs != null && costs.size() > 0) {
-                    (new CostView()).show(costs, lumpCosts, browser);
-                //} else {
-                    //(new LumpCostView()).show(lumpCosts, browser);
-                //}
+                if (costs != null && costs.size() > 0) {
+                    (new CostView()).show(costs, lumpCosts, detailCosts, browser);
+                } else {
+                    (new LumpCostView()).show(lumpCosts, detailCosts, browser);
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -225,6 +230,7 @@ public class TaskViewController implements Initializable {
             script = script.replace("arg3", task[1].equals("null") ? "" : task[1]);
             script = script.replace("arg4", task[2].equals("null") ? "" : task[2]);
             script = script.replace("arg5", task[3].equals("null") ? "" : task[3]);
+            script = script.replace("arg6", task[4].equals("null") ? "" : task[4]);
             script = script.replaceAll("\n", " ");
             System.out.println(script + "\n\n");
             browser.executeVoidScript(script);
@@ -268,9 +274,12 @@ public class TaskViewController implements Initializable {
     private void initializePage() {
         GTBPage pageInitializer = new GTBPage.Builder()
                 .setTaskCount(tasks.size())
+                .setPromoTasksAmount(0)
                 .setCostCount(costs.size())
                 .setLumpCostsAmount(lumpCosts.size())
-                .setBrowser(browser).createGTBPage();
+                .setDetailCostAmount(detailCosts.size())
+                .setBrowser(browser)
+                .createGTBPage();
 
         pageInitializer.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
             disableEditButtons(false);
@@ -328,5 +337,9 @@ public class TaskViewController implements Initializable {
 
     public void setLumpCosts(ArrayList<LumpCost> lumpCosts) {
         this.lumpCosts = lumpCosts;
+    }
+
+    public void setDetailCosts(ArrayList<DetailCost> detailCosts) {
+        this.detailCosts = detailCosts;
     }
 }

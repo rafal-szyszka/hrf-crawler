@@ -1,6 +1,4 @@
-package pl.cccenter.robot; /**
- * Created by Squier on 2016-10-11.
- */
+package pl.cccenter.robot;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +12,7 @@ import java.io.IOException;
 
 public class HRFRobot extends Application {
 
-    public static final String VERSION = "2.2.1";
+    public static final String VERSION = "2.3.11";
 
     public static final String ROBOT_SHEET = "ROBOT";
     public enum RunMode {

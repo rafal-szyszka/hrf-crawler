@@ -4,11 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.cccenter.robot.hrf.Cost;
-import pl.cccenter.robot.hrf.DetailCost;
-import pl.cccenter.robot.hrf.LumpCost;
-import pl.cccenter.robot.hrf.Task;
+import pl.cccenter.robot.gotobrand.controller.PromoTaskController;
 import pl.cccenter.robot.gotobrand.controller.TaskViewController;
+import pl.cccenter.robot.hrf.*;
 import pl.cccenter.robot.web.FirefoxBrowser;
 import pl.cccenter.robot.web.LoginData;
 
@@ -16,10 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Squier on 2016-10-16.
+ * Created by Rafał Szyszka on 02.03.2019.
  */
-public class TaskView {
+public class PromoTaskView {
 
+    private ArrayList<PromoTask> promoTasks;
     private ArrayList<Task> tasks;
     private ArrayList<Cost> costs;
     private ArrayList<LumpCost> lumpCosts;
@@ -27,7 +26,8 @@ public class TaskView {
     private FirefoxBrowser browser;
     private LoginData loginData;
 
-    private TaskView(ArrayList<Task> tasks, ArrayList<Cost> costs, ArrayList<LumpCost> lumpCosts, ArrayList<DetailCost> detailCosts, FirefoxBrowser browser, LoginData loginData) {
+    PromoTaskView(ArrayList<PromoTask> promoTasks, ArrayList<Task> tasks, ArrayList<Cost> costs, ArrayList<LumpCost> lumpCosts, ArrayList<DetailCost> detailCosts, FirefoxBrowser browser, LoginData loginData) {
+        this.promoTasks = promoTasks;
         this.tasks = tasks;
         this.costs = costs;
         this.lumpCosts = lumpCosts;
@@ -38,30 +38,36 @@ public class TaskView {
 
     public void show() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gotobrand/TaskView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gotobrand/PromoTaskView.fxml"));
         Parent root = fxmlLoader.load();
 
-        TaskViewController controller = fxmlLoader.getController();
+        PromoTaskController controller = fxmlLoader.getController();
         controller.setBrowser(browser);
+        controller.setPromoTasks(promoTasks);
         controller.setTasks(tasks);
         controller.setCosts(costs);
         controller.setLumpCosts(lumpCosts);
         controller.setDetailCosts(detailCosts);
-        controller.setLoginData(loginData);
 
         stage.setTitle("Wypełnij zadania");
-        stage.setScene(new Scene(root, 841, 333));
+        stage.setScene(new Scene(root));
         stage.setAlwaysOnTop(true);
         stage.show();
     }
 
     public static class Builder {
+        private ArrayList<PromoTask> promoTasks;
         private ArrayList<Task> tasks;
         private ArrayList<Cost> costs;
         private ArrayList<LumpCost> lumpCosts;
         private FirefoxBrowser browser;
         private LoginData loginData;
         private ArrayList<DetailCost> detailCosts;
+
+        public Builder setPromoTasks(ArrayList<PromoTask> promoTasks) {
+            this.promoTasks = promoTasks;
+            return this;
+        }
 
         public Builder setTasks(ArrayList<Task> tasks) {
             this.tasks = tasks;
@@ -88,8 +94,8 @@ public class TaskView {
             return this;
         }
 
-        public TaskView createTaskView() {
-            return new TaskView(tasks, costs, lumpCosts, detailCosts, browser, loginData);
+        public PromoTaskView createPromoProgramView() {
+            return new PromoTaskView(promoTasks, tasks, costs, lumpCosts, detailCosts, browser, loginData);
         }
 
         public Builder setDetailCosts(ArrayList<DetailCost> detailCosts) {
@@ -97,4 +103,5 @@ public class TaskView {
             return this;
         }
     }
+
 }

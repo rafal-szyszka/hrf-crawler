@@ -7,10 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
+import pl.cccenter.robot.gotobrand.DetailCostView;
 import pl.cccenter.robot.gotobrand.web.GTBLumpCosts;
+import pl.cccenter.robot.hrf.DetailCost;
 import pl.cccenter.robot.hrf.LumpCost;
 import pl.cccenter.robot.web.FirefoxBrowser;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,6 +31,7 @@ public class LumpCostController implements Initializable {
 
     private FirefoxBrowser browser;
     private ArrayList<LumpCost> lumpCosts;
+    private ArrayList<DetailCost> detailCosts;
 
     public void fillForm() {
         ArrayList<String[]> lumpCostsAttrs = new ArrayList<>();
@@ -37,11 +41,21 @@ public class LumpCostController implements Initializable {
         gtbLumpCosts.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
             progressMsg.textProperty().unbind();
             progressBar.progressProperty().unbind();
-            message.setText("Pomyślnie wypełniłeś wniosek! :)");
-            fillForm.setDisable(true);
-            fillForm.setVisible(false);
-            closeApp.setVisible(true);
-            closeApp.setDisable(false);
+
+            if (detailCosts.size() > 0) {
+                try {
+                    closeApp();
+                    (new DetailCostView()).show(detailCosts, browser);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                message.setText("Pomyślnie wypełniłeś wniosek! :)");
+                fillForm.setDisable(true);
+                fillForm.setVisible(false);
+                closeApp.setVisible(true);
+                closeApp.setDisable(false);
+            }
         });
 
         progressMsg.textProperty().bind(gtbLumpCosts.messageProperty());
@@ -96,5 +110,9 @@ public class LumpCostController implements Initializable {
 
     public void setLumpCosts(ArrayList<LumpCost> lumpCosts) {
         this.lumpCosts = lumpCosts;
+    }
+
+    public void setDetailCosts(ArrayList<DetailCost> detailCosts) {
+        this.detailCosts = detailCosts;
     }
 }

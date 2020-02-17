@@ -14,6 +14,7 @@ public class LumpCost extends HRFItem {
     public static int QUALIFIED_COSTS = 6;
     public static int SUBSIDY = 7;
     public static int IS_LUMP = 8;
+    public static int DOCUMENTS = 9;
 
     public LumpCost(String atrString) {
         super(atrString);

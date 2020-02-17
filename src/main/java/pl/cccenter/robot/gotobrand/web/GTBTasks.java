@@ -31,6 +31,15 @@ public class GTBTasks extends javafx.concurrent.Task<Void> {
             "taskName.value = 'arg2';\n" +
             "taskName.dispatchEvent(new Event('change'));\n" +
             "\n" +
+            "var taskPromo = document.getElementById(\"zakres_rzeczowo_finansowy_zadania_arg1_dzialaniePromocyjne\");\n" +
+            "for (var i = 0; i < taskPromo.options.length; i++) {\n" +
+            "\n" +
+            "\tif (taskPromo.options[i].text.indexOf(\"arg6\") !== -1) {\n" +
+            "\t\ttaskPromo.options[i].selected = true;\n" +
+            "\t\ttaskPromo.dispatchEvent(new Event('change'));\n" +
+            "\t}\n" +
+            "\n" +
+            "}" +
             "var taskDesc = document.getElementById('zakres_rzeczowo_finansowy_zadania_arg1_opisPlanowanychDzialan');\n" +
             "taskDesc.value = 'arg3';\n" +
             "taskDesc.dispatchEvent(new Event('change'));\n" +
@@ -62,6 +71,7 @@ public class GTBTasks extends javafx.concurrent.Task<Void> {
             script = script.replace("arg3", task[Task.DESCRIPTION].equals("null") ? "" : task[Task.DESCRIPTION]);
             script = script.replace("arg4", task[Task.START_DATE].equals("null") ? "" : task[Task.START_DATE]);
             script = script.replace("arg5", task[Task.END_DATE].equals("null") ? "" : task[Task.END_DATE]);
+            script = script.replace("arg6", task[Task.PROMO_TASK].equals("null") ? "" : task[Task.PROMO_TASK]);
             script = script.replaceAll("\n", " ");
             browser.executeVoidScript(script);
         }

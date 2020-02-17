@@ -22,6 +22,7 @@ public class GTBLumpCosts extends Task<Void> {
         public static final String QUALIFIED_COST = "argQualifiedCost";
         public static final String SUBSIDY = "argSubsidy";
         public static final String IS_LUMP = "argIfLump";
+        public static final String DOCUMENTS = "argDocuments";
     }
 
     public static final String FILL_LUMP_COST_SCRIPT =
@@ -39,8 +40,8 @@ public class GTBLumpCosts extends Task<Void> {
             "\t\tif(lumpSelect.options[i].innerHTML == \"argLumpType\") {\n" +
             "\t\t\tlumpSelect.options[i].selected = true;\n" +
             "\t\t\tlumpSelect.dispatchEvent(new Event('change'));\n" +
-            "        }\n" +
-            "    }\n" +
+            "\t\t\t\t}\n" +
+            "\t\t\t}\n" +
             "\n" +
             "\tvar lumpName = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_nazwaRyczaltuSlownie');\n" +
             "\tlumpName.value = \"argLumpName\";\n" +
@@ -55,12 +56,12 @@ public class GTBLumpCosts extends Task<Void> {
             "\tpointerValue.dispatchEvent(new Event('change'));\n" +
             "\n" +
             "\tvar categorySelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_kategoriaKosztowKwotaRyczaltowa');\n" +
-            "    for(var i = 0; i < categorySelect.options.length; i++) {\n" +
-            "        if(categorySelect.options[i].innerHTML == \"argCategory\") {\n" +
-            "            categorySelect.options[i].selected = true;\n" +
-            "            categorySelect.dispatchEvent(new Event('change'));\n" +
-            "        }\n" +
-            "    }\n" +
+            "\tfor(var i = 0; i < categorySelect.options.length; i++) {\n" +
+            "\t\tif(categorySelect.options[i].innerHTML == \"argCategory\") {\n" +
+            "\t\t\tcategorySelect.options[i].selected = true;\n" +
+            "\t\t\tcategorySelect.dispatchEvent(new Event('change'));\n" +
+            "\t\t}\n" +
+            "\t}\n" +
             "}\n" +
             "\n" +
             "var qualifiedCost = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wydatkiKwalifikowalne_tbbc_amount');\n" +
@@ -69,7 +70,11 @@ public class GTBLumpCosts extends Task<Void> {
             "\n" +
             "var subsidy = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wnioskowaneDofinansowanie_tbbc_amount');\n" +
             "subsidy.value = \"argSubsidy\";\n" +
-            "subsidy.dispatchEvent(new Event('change'));";
+            "subsidy.dispatchEvent(new Event('change'));" +
+            "var documents = document.getElementById(\"zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_dokumentyPotwierdzajace\");\n" +
+            "\n" +
+            "documents.value = \"argDocuments\";\n" +
+            "documents.dispatchEvent(new Event(\"change\"));";
 
     private ArrayList<String[]> costs;
     private FirefoxBrowser browser;
@@ -95,10 +100,11 @@ public class GTBLumpCosts extends Task<Void> {
                     .replace(Arguments.SUBSIDY, cost[LumpCost.SUBSIDY])
                     .replace(Arguments.TASK, cost[LumpCost.TASK])
                     .replace(Arguments.IS_LUMP, cost[LumpCost.IS_LUMP])
+                    .replace(Arguments.DOCUMENTS, cost[LumpCost.DOCUMENTS])
                     .replaceAll("\n", " ");
             browser.executeVoidScript(script);
             updateProgress(i+1, costs.size());
-            updateMessage(progressMsg + i + " na " + costs.size());
+            updateMessage(progressMsg + (i+1) + " na " + costs.size());
         }
 
         return null;

@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cccenter.robot.gotobrand.controller.LumpCostController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cccenter.robot.gotobrand.controller.DetailCostController">
     <children>
-        <Label fx:id="message" text="Uzupełnianie kosztów ryczałtowych." />
+        <Label fx:id="message" text="Uzupełnianie wydatków szczegółowych." />
         <Label fx:id="progressMsg" text="Uzupełniono: 0/0">
             <VBox.margin>
                 <Insets top="50.0" />

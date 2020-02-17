@@ -26,6 +26,10 @@ public class HRFItemReader {
         public static final String COST_AMOUNT = "COST_AMOUNT";
         public static final String LUMP_COST = "L_COST";
         public static final String LUMP_COST_AMOUNT = "L_COST_AMOUNT";
+        public static final String PROMO_TASK_AMOUNT = "PROMO_TASK_AMOUNT";
+        public static final String PROMO_TASK = "PROMO_TASK";
+        public static final String DETAIL_COST_AMOUNT = "D_COST_AMOUNT";
+        public static final String DETAIL_COST = "D_COST";
         public static final String END = "END";
     }
 

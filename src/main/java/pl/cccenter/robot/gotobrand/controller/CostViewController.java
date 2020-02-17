@@ -11,6 +11,7 @@ import pl.cccenter.robot.gotobrand.LumpCostView;
 import pl.cccenter.robot.gotobrand.web.GTBCosts;
 import pl.cccenter.robot.gotobrand.web.GTBPage;
 import pl.cccenter.robot.hrf.Cost;
+import pl.cccenter.robot.hrf.DetailCost;
 import pl.cccenter.robot.hrf.LumpCost;
 import pl.cccenter.robot.web.FirefoxBrowser;
 
@@ -88,6 +89,7 @@ public class CostViewController implements Initializable {
     private int editionPlace;
     private boolean prevClicked;
     private boolean nextClicked;
+    private ArrayList<DetailCost> detailCosts;
 
     public CostViewController() {
     }
@@ -307,5 +309,9 @@ public class CostViewController implements Initializable {
         message.setText("");
         closeApp.setDisable(true);
         closeApp.setVisible(false);
+    }
+
+    public void setDetailCosts(ArrayList<DetailCost> detailCosts) {
+        this.detailCosts = detailCosts;
     }
 }

@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import pl.cccenter.robot.gotobrand.controller.CostViewController;
 import pl.cccenter.robot.gotobrand.controller.TaskViewController;
 import pl.cccenter.robot.hrf.Cost;
+import pl.cccenter.robot.hrf.DetailCost;
 import pl.cccenter.robot.hrf.LumpCost;
 import pl.cccenter.robot.web.FirefoxBrowser;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  */
 public class CostView {
 
-    public void show(ArrayList<Cost> costs, ArrayList<LumpCost> lumpCosts, FirefoxBrowser browser) throws IOException {
+    public void show(ArrayList<Cost> costs, ArrayList<LumpCost> lumpCosts, ArrayList<DetailCost> detailCosts, FirefoxBrowser browser) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gotobrand/CostView.fxml"));
         Parent root = fxmlLoader.load();
@@ -27,6 +28,7 @@ public class CostView {
         controller.setBrowser(browser);
         controller.setCosts(costs);
         controller.setLumpCosts(lumpCosts);
+        controller.setDetailCosts(detailCosts);
 
         stage.setTitle("Wypełnij koszta");
         stage.setScene(new Scene(root));
