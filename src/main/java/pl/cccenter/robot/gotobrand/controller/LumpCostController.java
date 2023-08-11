@@ -35,7 +35,7 @@ public class LumpCostController implements Initializable {
 
     public void fillForm() {
         ArrayList<String[]> lumpCostsAttrs = new ArrayList<>();
-        lumpCosts.forEach(lumpCost -> lumpCostsAttrs.add(lumpCost.splitToAtr()));
+        lumpCosts.forEach(lumpCost -> {System.out.println(lumpCost.getAtrString()); lumpCostsAttrs.add(lumpCost.splitToAtr());});
 
         GTBLumpCosts gtbLumpCosts = new GTBLumpCosts(lumpCostsAttrs, browser);
         gtbLumpCosts.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
@@ -63,22 +63,23 @@ public class LumpCostController implements Initializable {
         gtbLumpCosts.setProgressMsg("Uzupełniono: ");
 
         new Thread(gtbLumpCosts).start();
-        //manualFill(lumpCostsAttrs);
+//        manualFill(lumpCostsAttrs);
     }
 
     private void manualFill(ArrayList<String[]> lumpCostsAttrs) {
         for(int i = 0; i < lumpCostsAttrs.size(); i++) {
             String[] cost = lumpCostsAttrs.get(i);
             String script = GTBLumpCosts.FILL_LUMP_COST_SCRIPT.replaceAll(GTBLumpCosts.Arguments.INDEX, Integer.toString(i))
-                    .replace(GTBLumpCosts.Arguments.CATEGORY, cost[LumpCost.CATEGORY])
-                    .replace(GTBLumpCosts.Arguments.LUMP_NAME, cost[LumpCost.NAME])
-                    .replace(GTBLumpCosts.Arguments.LUMP_TYPE, cost[LumpCost.TYPE])
-                    .replace(GTBLumpCosts.Arguments.POINTER_NAME, cost[LumpCost.POINTER_NAME])
-                    .replace(GTBLumpCosts.Arguments.POINTER_VALUE, cost[LumpCost.POINTER_VALUE])
-                    .replace(GTBLumpCosts.Arguments.QUALIFIED_COST, cost[LumpCost.QUALIFIED_COSTS])
-                    .replace(GTBLumpCosts.Arguments.SUBSIDY, cost[LumpCost.SUBSIDY])
-                    .replace(GTBLumpCosts.Arguments.TASK, cost[LumpCost.TASK])
-                    .replace(GTBLumpCosts.Arguments.IS_LUMP, cost[LumpCost.IS_LUMP])
+                    .replace(GTBLumpCosts.Arguments.CATEGORY, cost[LumpCost.CATEGORY].trim())
+                    .replace(GTBLumpCosts.Arguments.LUMP_NAME, cost[LumpCost.NAME].trim())
+                    .replace(GTBLumpCosts.Arguments.LUMP_TYPE, cost[LumpCost.TYPE].trim())
+                    .replace(GTBLumpCosts.Arguments.POINTER_NAME, cost[LumpCost.POINTER_NAME].trim())
+                    .replace(GTBLumpCosts.Arguments.POINTER_VALUE, cost[LumpCost.POINTER_VALUE].trim())
+                    .replace(GTBLumpCosts.Arguments.QUALIFIED_COST, cost[LumpCost.QUALIFIED_COSTS].trim())
+                    .replace(GTBLumpCosts.Arguments.SUBSIDY, cost[LumpCost.SUBSIDY].trim())
+                    .replace(GTBLumpCosts.Arguments.TASK, cost[LumpCost.TASK].trim())
+                    .replace(GTBLumpCosts.Arguments.IS_LUMP, cost[LumpCost.IS_LUMP].trim())
+                    .replace(GTBLumpCosts.Arguments.DOCUMENTS, cost[LumpCost.DOCUMENTS].trim())
                     .replaceAll("\n", " ");
             System.out.println(script);
             browser.executeVoidScript(script);

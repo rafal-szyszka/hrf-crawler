@@ -27,54 +27,65 @@ public class GTBLumpCosts extends Task<Void> {
 
     public static final String FILL_LUMP_COST_SCRIPT =
             "var taskSelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_zadanie');\n" +
-            "for(var i = 0; i < taskSelect.options.length; i++) {\n" +
-            "\tif(taskSelect.options[i].innerHTML == \"argTask\") {\n" +
-            "\t\ttaskSelect.options[i].selected = true;\n" +
-            "\t\ttaskSelect.dispatchEvent(new Event('change'));\n" +
-            "\t}\n" +
-            "}\n" +
-            "\n" +
-            "if(argIfLump) {\n" +
-            "\tvar lumpSelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_rodzajRyczaltu');\n" +
-            "\tfor(var i = 0; i < lumpSelect.options.length; i++) {\n" +
-            "\t\tif(lumpSelect.options[i].innerHTML == \"argLumpType\") {\n" +
-            "\t\t\tlumpSelect.options[i].selected = true;\n" +
-            "\t\t\tlumpSelect.dispatchEvent(new Event('change'));\n" +
-            "\t\t\t\t}\n" +
-            "\t\t\t}\n" +
-            "\n" +
-            "\tvar lumpName = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_nazwaRyczaltuSlownie');\n" +
-            "\tlumpName.value = \"argLumpName\";\n" +
-            "\tlumpName.dispatchEvent(new Event('change')); \n" +
-            "\n" +
-            "\tvar pointerName = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_nazwaWskaznika');\n" +
-            "\tpointerName.value = \"argPointerName\";\n" +
-            "\tpointerName.dispatchEvent(new Event('change'));\n" +
-            "\n" +
-            "\tvar pointerValue = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wartoscWskaznika_tbbc_amount');\n" +
-            "\tpointerValue.value = \"argPointerValue\";\n" +
-            "\tpointerValue.dispatchEvent(new Event('change'));\n" +
-            "\n" +
-            "\tvar categorySelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_kategoriaKosztowKwotaRyczaltowa');\n" +
-            "\tfor(var i = 0; i < categorySelect.options.length; i++) {\n" +
-            "\t\tif(categorySelect.options[i].innerHTML == \"argCategory\") {\n" +
-            "\t\t\tcategorySelect.options[i].selected = true;\n" +
-            "\t\t\tcategorySelect.dispatchEvent(new Event('change'));\n" +
-            "\t\t}\n" +
-            "\t}\n" +
-            "}\n" +
-            "\n" +
-            "var qualifiedCost = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wydatkiKwalifikowalne_tbbc_amount');\n" +
-            "qualifiedCost.value = \"argQualifiedCost\";\n" +
-            "qualifiedCost.dispatchEvent(new Event('change'));\n" +
-            "\n" +
-            "var subsidy = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wnioskowaneDofinansowanie_tbbc_amount');\n" +
-            "subsidy.value = \"argSubsidy\";\n" +
-            "subsidy.dispatchEvent(new Event('change'));" +
-            "var documents = document.getElementById(\"zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_dokumentyPotwierdzajace\");\n" +
-            "\n" +
-            "documents.value = \"argDocuments\";\n" +
-            "documents.dispatchEvent(new Event(\"change\"));";
+                    "for (var i = 0; i < taskSelect.options.length; i++) {\n" +
+                    "    if (taskSelect.options[i].innerHTML == \"argTask\") {\n" +
+                    "        taskSelect.options[i].selected = true;\n" +
+                    "        taskSelect.dispatchEvent(new Event('change'));\n" +
+                    "    }\n" +
+                    "}\n" +
+                    "\n" +
+                    "var lumpSelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_rodzajRyczaltu');\n" +
+                    "for (var i = 0; i < lumpSelect.options.length; i++) {\n" +
+                    "    if (lumpSelect.options[i].innerHTML == \"argLumpType\") {\n" +
+                    "        lumpSelect.options[i].selected = true;\n" +
+                    "        lumpSelect.dispatchEvent(new Event('change'));\n" +
+                    "    }\n" +
+                    "}\n" +
+                    "\n" +
+                    "if (argIfLump) {\n" +
+                    "    var categorySelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_kategoriaKosztowKwotaRyczaltowa');\n" +
+                    "    for (var i = 0; i < categorySelect.options.length; i++) {\n" +
+                    "        if (categorySelect.options[i].innerHTML == \"argCategory\") {\n" +
+                    "            categorySelect.options[i].selected = true;\n" +
+                    "            categorySelect.dispatchEvent(new Event('change'));\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    var lumpNameSelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_nazwaRyczaltuDlaKwotyRyczaltowej');\n" +
+                    "    for (var i = 0; i < lumpNameSelect.options.length; i++) {\n" +
+                    "        if (lumpNameSelect.options[i].innerHTML == \"argLumpName\") {\n" +
+                    "            lumpNameSelect.options[i].selected = true;\n" +
+                    "            lumpNameSelect.dispatchEvent(new Event('change'));\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    var pointerNameSelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_nazwaWskaznikaDlaKwotyRyczaltowej');\n" +
+                    "    for (var i = 0; i < pointerNameSelect.options.length; i++) {\n" +
+                    "        if (pointerNameSelect.options[i].innerHTML == \"argPointerName\") {\n" +
+                    "            pointerNameSelect.options[i].selected = true;\n" +
+                    "            pointerNameSelect.dispatchEvent(new Event('change'));\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "    var pointerValue = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wartoscWskaznika_tbbc_amount');\n" +
+                    "    pointerValue.value = \"argPointerValue\";\n" +
+                    "    pointerValue.dispatchEvent(new Event('change'));\n" +
+                    "\n" +
+                    "    var documentsSelect = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_nazwaDokumentuDlaKwotyRyczaltowej');\n" +
+                    "    for (var i = 0; i < documentsSelect.options.length; i++) {\n" +
+                    "        if (documentsSelect.options[i].innerHTML == \"argDocuments\") {\n" +
+                    "            documentsSelect.options[i].selected = true;\n" +
+                    "            documentsSelect.dispatchEvent(new Event('change'));\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}\n" +
+                    "\n" +
+                    "var qualifiedCost = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wydatkiKwalifikowalne_tbbc_amount');\n" +
+                    "qualifiedCost.value = \"argQualifiedCost\";\n" +
+                    "qualifiedCost.dispatchEvent(new Event('change'));\n" +
+                    "\n" +
+                    "var subsidy = document.getElementById('zakres_rzeczowo_finansowy_wydatkiRyczaltowe_argIdx_wnioskowaneDofinansowanie_tbbc_amount');\n" +
+                    "subsidy.value = \"argSubsidy\";\n" +
+                    "subsidy.dispatchEvent(new Event('change'));";
 
     private ArrayList<String[]> costs;
     private FirefoxBrowser browser;
@@ -91,16 +102,16 @@ public class GTBLumpCosts extends Task<Void> {
         for(int i = 0; i < costs.size(); i++) {
             String[] cost = costs.get(i);
             String script = FILL_LUMP_COST_SCRIPT.replaceAll(Arguments.INDEX, Integer.toString(i))
-                    .replace(Arguments.CATEGORY, cost[LumpCost.CATEGORY])
-                    .replace(Arguments.LUMP_NAME, cost[LumpCost.NAME])
-                    .replace(Arguments.LUMP_TYPE, cost[LumpCost.TYPE])
-                    .replace(Arguments.POINTER_NAME, cost[LumpCost.POINTER_NAME])
-                    .replace(Arguments.POINTER_VALUE, cost[LumpCost.POINTER_VALUE])
-                    .replace(Arguments.QUALIFIED_COST, cost[LumpCost.QUALIFIED_COSTS])
-                    .replace(Arguments.SUBSIDY, cost[LumpCost.SUBSIDY])
-                    .replace(Arguments.TASK, cost[LumpCost.TASK])
-                    .replace(Arguments.IS_LUMP, cost[LumpCost.IS_LUMP])
-                    .replace(Arguments.DOCUMENTS, cost[LumpCost.DOCUMENTS])
+                    .replace(Arguments.CATEGORY, cost[LumpCost.CATEGORY].trim())
+                    .replace(Arguments.LUMP_NAME, cost[LumpCost.NAME].trim())
+                    .replace(Arguments.LUMP_TYPE, cost[LumpCost.TYPE].trim())
+                    .replace(Arguments.POINTER_NAME, cost[LumpCost.POINTER_NAME].trim())
+                    .replace(Arguments.POINTER_VALUE, cost[LumpCost.POINTER_VALUE].trim())
+                    .replace(Arguments.QUALIFIED_COST, cost[LumpCost.QUALIFIED_COSTS].trim())
+                    .replace(Arguments.SUBSIDY, cost[LumpCost.SUBSIDY].trim())
+                    .replace(Arguments.TASK, cost[LumpCost.TASK].trim())
+                    .replace(Arguments.IS_LUMP, cost[LumpCost.IS_LUMP].trim())
+                    .replace(Arguments.DOCUMENTS, cost[LumpCost.DOCUMENTS].trim())
                     .replaceAll("\n", " ");
             browser.executeVoidScript(script);
             updateProgress(i+1, costs.size());
